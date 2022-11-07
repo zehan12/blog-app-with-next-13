@@ -1,18 +1,15 @@
-import { Fragment } from "react";
 
-export default function PostsLayout({childern}) {
+export default function PostsLayout(props) {
     return (
-        <Fragment>
             <div>
                 PostsLayout
                 <ul>
                     <li>some link</li>
                     <li>link 2</li>
                 </ul>
-                <div>
-                    {childern}
-                </div>
+            <div>
             </div>
-        </Fragment>
+                {props.children}
+            </div>
     )
 }
