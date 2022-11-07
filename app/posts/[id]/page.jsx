@@ -4,7 +4,7 @@ const getPostById = async (id) => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, 
         {
             // next: { revalidate: 10 },
-            cache: 'no-store'
+            // cache: 'no-store'
 
         }
     )
