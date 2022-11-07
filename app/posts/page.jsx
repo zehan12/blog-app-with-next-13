@@ -22,7 +22,7 @@ export default async function PostsPage() {
         throw new Error("Something Went Wrong")
     }
 
-    if ( posts.length > 0  ) {
+    if ( posts.length === 0  ) {
         notFound();
     }
 
