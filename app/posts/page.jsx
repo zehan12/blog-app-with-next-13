@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React, { Fragment } from "react";
+import { notFound } from "next/navigation";
 
 async function wait(timeInNs){
     return new Promise((resolve,_)=>{
