@@ -1,5 +1,14 @@
 import { Fragment } from "react";
 
+async function wait(timeInNs){
+    return new Promise((resolve,_)=>{
+        setTimeout(()=>{
+            resolve(true)
+        }, timeInNs)
+    })
+
+}
+
 const getPostById = async (id) => {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, 
         // {
@@ -9,6 +18,7 @@ const getPostById = async (id) => {
         // }
     )
     const post = await response.json();
+    await wait(2000)
     return post;
 }
 

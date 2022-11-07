@@ -1,10 +1,18 @@
 import Link from "next/link";
 import React, { Fragment } from "react";
 
+async function wait(timeInNs){
+    return new Promise((resolve,_)=>{
+        setTimeout(()=>{
+            resolve(true)
+        }, timeInNs)
+    })
 
+}
 
 export default async function PostsPage() {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts')
+    await wait(1000)
     const posts = await response.json()
 
     if ( posts === undefined ) {
