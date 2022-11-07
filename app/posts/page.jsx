@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React, { Fragment } from "react";
 import { notFound } from "next/navigation";
+import styles from './page.module.css'
+
 
 async function wait(timeInNs){
     return new Promise((resolve,_)=>{
@@ -20,9 +22,15 @@ export default async function PostsPage() {
         throw new Error("Something Went Wrong")
     }
 
+    if ( posts.length > 0  ) {
+        notFound();
+    }
+
+
+
     return (
         <Fragment>
-            <h1>Post Page</h1>
+            <h1 className={styles.h2}>Post Page</h1>
             {
                 posts.map((post)=>(<div key={post.id}>
                     <Link href={`/posts/${post.id}`}>{post.id} {post.title}</Link>
