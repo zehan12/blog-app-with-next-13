@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const articleSchema = new Schema({
     title: String,
     content: String
-},{timestamps:true});
+}, { timestamps: true }
+);
 
-module.exports = mongoose.model( "Article", articleSchema );
+export default mongoose.models.Article || mongoose.model("Article", articleSchema)
