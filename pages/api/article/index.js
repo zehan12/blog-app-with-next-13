@@ -26,7 +26,7 @@ export default async function handler(req,res){
             }
             const createArticle = await Article.create(articleBody);
             return res.status(200).json(createArticle)
-          } catch (err) {
+       } catch (err) {
             return res.status(400).json({msg:err.message});
           }
     }
