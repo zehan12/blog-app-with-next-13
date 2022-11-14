@@ -1,5 +1,5 @@
 import './globals.css'
-import Link from "next/link";
+import Header from './header'
 
 export default function RootLayout({ children }) {
   return (
@@ -10,19 +10,7 @@ export default function RootLayout({ children }) {
       */}
       <head />
       <body>
-        <nav>
-          <ul>
-            <li>
-              <Link href="/">Home</Link>
-            </li>
-            <li>
-              <Link href="/posts">Posts</Link>
-            </li>
-            <li>
-              <Link href="/about">About</Link>
-            </li>
-          </ul>
-        </nav>
+        <Header />
         {children}
       </body>
     </html>
