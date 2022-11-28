@@ -1,33 +1,47 @@
 import { dbConnect } from "../../../utils/dbConnect";
-import Article from "../../../models/Article"
+import Article from "../../../models/Article";
+import { errorMessage, successMessage, status } from "../../../helplers/status";
 
 
 dbConnect()
 
-export default async function handler(req,res){
-    const { method, body } = req;
-    switch ( method ) {
-        case "GET": 
-          try {
-            const article  = await Article.find();
-            return res.status(200).json(article)
-          } catch ( err ) {
-            return res.status(400).json({msg:err.message});
-          }
+export default async function handler(req, res) {
+  const { method, body } = req;
+  switch (method) {
 
-        case "POST":
-          try {
-            const { title, content } = body;
-            const slug = title.split(" ").join("-")+String(Date.now()).slice(9)
-            const articleBody = {
-                title: title,
-                content: content,
-                slug
-            }
-            const createArticle = await Article.create(articleBody);
-            return res.status(200).json(createArticle)
-       } catch (err) {
-            return res.status(400).json({msg:err.message});
-          }
+    case "GET":
+      try {
+        const article = await Article.find();
+        successMessage.articles = article
+        return res.status(status.success).json(successMessage)
+      } catch (err) {
+        errorMessage.error = err.message 
+        return res.status(status.bad).json({ errorMessage });
+      }
+
+    case "POST":
+      try {
+        let { title, description, content, tagList, author } = body;
+        if ( !title || !description || !content ) {
+          errorMessage.error = "title, description and content field cannot be empty"
+          return res.status(status.bad).json({error:errorMessage})
+        }
+        if ( !author ) {
+          errorMessage.error = "Author name not found"
+          return res.status(status.notfound).json({error:errorMessage})
+        }
+        if ( tagList ) {
+          console.log( tagList)
+          tagList = tagList.split(",")
+          console.log(tagList)
+        }
+        
+        const createArticle = await Article.create({ title, description, content, tagList, author });
+        return res.status(status.success).json(createArticle)
+      } catch (err) {
+        errorMessage.error = err.message
+        return res.status(status.bad).json({ error: errorMessage });
+      }
     }
 }
+

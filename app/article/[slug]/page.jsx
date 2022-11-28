@@ -30,6 +30,7 @@ export default async function ArticleWithSlugPage({ params, searchParams }) {
         <Fragment>
             <div>Article Slug Page</div>
             <pre>{JSON.stringify(article, null, 2)}</pre>
+            
         </Fragment>
     )
 }
